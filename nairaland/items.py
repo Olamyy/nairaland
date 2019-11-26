@@ -10,8 +10,6 @@ import scrapy
 from scrapy.item import Item, Field
 
 class NairalandItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     topic = Field()
     url = Field()
     topic_id = Field()
@@ -19,6 +17,8 @@ class NairalandItem(scrapy.Item):
     view_count = Field()
     valid = Field()
     comments = Field()
+    timestamp = Field()
+    sex = Field()
 
 
 
