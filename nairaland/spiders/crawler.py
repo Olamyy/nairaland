@@ -28,12 +28,15 @@ def get_sub_page_count(soup, val):
     else:
         return int(max(nn))
 
+
+MAX_URL = 6000000
+
 class CrawlerSpider(scrapy.Spider):
     name = 'crawler'
     allowed_domains = ['https://nairaland.com/']
 
     def start_requests(self):
-        urls = [self.allowed_domains[0]+str(i) + '/' for i in range(14, 16)]
+        urls = [self.allowed_domains[0]+str(i) + '/' for i in range(14, MAX_URL)]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
 
