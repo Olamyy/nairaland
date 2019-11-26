@@ -48,7 +48,8 @@ class CrawlerSpider(scrapy.Spider):
         if not table:
             nairalandItem['class_'] = None
             nairalandItem['view_count'] = None
-            nairalandItem['comments'] = [{'user': None, 'text': "This topic has been deleted or removed", 'pageId': None}]
+            nairalandItem['comments'] = [{'user': None, 'text': "This topic has been deleted or removed", 'pageId': None, 'raw_text':None,
+            'sex': None, 'datetimestamp':None}]
         else:
             nairalandItem['class_'] = table.text.split('/')[2:]
             nairalandItem['view_count'] = get_view_count(table.text.split('/')[-1])
@@ -62,9 +63,16 @@ class CrawlerSpider(scrapy.Spider):
                     for td in user: 
                         comment = {}
                         cr = td.find("a", {'class': 'user'})
+                        cd = td.find("span", {"class": "s"})
+                        sex = td.find("span", {"class": "m"})
+                        attachments = text.find_all("img", {"class": "attachmentimage img"})
                         if cr:
                             comment['user'] = cr.text
+                            comment['datetimestamp'] = cd.text
                             comment['text'] = text.text
+                            comment['raw_text'] = text
+                            comment['attachments'] = [i['src'] for i in attachments if i]
+                            comment['sex'] = sex.text if sex else "f"
                             comment['pageId'] = idx
                             comments.append(comment)
                 nairalandItem['comments'] = comments
