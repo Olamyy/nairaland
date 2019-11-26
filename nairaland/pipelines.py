@@ -6,9 +6,10 @@
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
-from scrapy.conf import settings
+from scrapy.utils.project import get_project_settings
 from scrapy.exceptions import DropItem
 
+settings = get_project_settings()
 
 class MongoDBPipeline(object):
 
