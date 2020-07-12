@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'nairaland.spiders'
 
 MONGODB_SERVER = 'localhost'
 
-MONGODB_PORT = 80
+MONGODB_PORT = 27017
 
 MONGODB_DB = 'nairaland'
 
