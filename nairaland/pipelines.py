@@ -11,6 +11,7 @@ from scrapy.exceptions import DropItem
 
 settings = get_project_settings()
 
+
 class MongoDBPipeline(object):
 
     def __init__(self):
