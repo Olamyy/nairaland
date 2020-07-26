@@ -79,10 +79,18 @@ class CrawlerSpider(scrapy.Spider):
                         if cr:
                             comment['user'] = cr.text
                             comment['timestamp'] = cd.text
-                            comment['text'] = text.text
                             comment['attachments'] = [i['src'] for i in attachments if i]
                             comment['sex'] = sex.text if sex else "f"
                             comment['pageId'] = idx
+                            if text.find('blockquote'):
+                                quoted_text = text.find('blockquote').text
+                                comment['is_quote'] = True
+                                comment['text'] = text.text.replace(quoted_text, '')
+                                comment['quoted_text'] = quoted_text.split(':')[-1]
+                            else:
+                                comment['is_quote'] = False
+                                comment['text'] = text.text
+                                comment['quoted_text'] = ''
                             comments.append(comment)
                 nairalandItem['comments'] = comments
             yield nairalandItem
