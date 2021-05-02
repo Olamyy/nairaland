@@ -16,6 +16,8 @@ NEWSPIDER_MODULE = 'nairaland.spiders'
 
 MONGODB_SERVER = 'localhost'
 
+MONGODB_URI = "mongodb+srv://olamilekan:olamilekan@nairaland.d7jp5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
 MONGODB_PORT = 27017
 
 MONGODB_DB = 'nairaland'
